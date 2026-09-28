@@ -21,7 +21,7 @@ build/version.txt: .git/index $(SRCFILES) LICENSE
 	git describe --match='v[0-9]*' --dirty=+ | sed -e 's/^v//' > "$@"
 
 build/manifest.json: src/manifest.json build/version.txt
-	sed -e "s/__BUILD_version__/$(shell cat build/version.txt)/g" > "$@"
+	sed -e "s/__BUILD_version__/$(shell cat build/version.txt)/g" "$@"
 
 dist/minimizeonclose.xpi: $(SRCFILES) build/manifest.json LICENSE
 	mkdir -p "$(@D)"
