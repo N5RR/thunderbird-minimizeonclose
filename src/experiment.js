@@ -59,21 +59,13 @@ this.ex_windows = class extends ExtensionCommon.ExtensionAPI {
     return {
       ex_windows: {
         lockWindow(windowId) {
-          const windowWrapper = extension.windowManager.get(windowId, context);
-          if (!windowWrapper) {
-            throw new Error(`Window ${windowId} not found`);
-          }
-          const window = windowWrapper.window;
+          const window = extension.windowManager.get(windowId, context).window;
           lockWindow(window);
           lockedWindows.push(window);
         },
 
         unlockWindow(windowId) {
-          const windowWrapper = extension.windowManager.get(windowId, context);
-          if (!windowWrapper) {
-            return;
-          }
-          const window = windowWrapper.window;
+          const window = extension.windowManager.get(windowId, context).window;
           const index = lockedWindows.indexOf(window);
           if (index >= 0) {
             unlockWindow(window);
